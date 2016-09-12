@@ -67,7 +67,7 @@ public static class GameResources
 
 	public static Font GameFont(string font)
 	{
-		return _Fonts(font);
+		return _Fonts[font];
 	}
 
 	/// <summary>
@@ -78,8 +78,8 @@ public static class GameResources
 
 	public static Bitmap GameImage(string image)
 	{
-		return _Images(image);
-	}
+        return _Images[image];
+    }
 
 	/// <summary>
 	/// Gets an sound loaded in the Resources
@@ -89,8 +89,8 @@ public static class GameResources
 
 	public static SoundEffect GameSound(string sound)
 	{
-		return _Sounds(sound);
-	}
+		return _Sounds[sound];
+    }
 
 	/// <summary>
 	/// Gets the music loaded in the Resources
@@ -100,8 +100,8 @@ public static class GameResources
 
 	public static Music GameMusic(string music)
 	{
-		return _Music(music);
-	}
+		return _Music[music];
+    }
 
 	private static Dictionary<string, Bitmap> _Images = new Dictionary<string, Bitmap>();
 	private static Dictionary<string, Font> _Fonts = new Dictionary<string, Font>();
@@ -267,7 +267,6 @@ public static class GameResources
 
 	private static void FreeFonts()
 	{
-		Font obj = default( Font );
 		foreach ( Font obj in _Fonts.Values ) {
 			SwinGame.FreeFont( obj );
 		}
@@ -275,7 +274,6 @@ public static class GameResources
 
 	private static void FreeImages()
 	{
-		Bitmap obj = default( Bitmap );
 		foreach ( Bitmap obj in _Images.Values ) {
 			SwinGame.FreeBitmap( obj );
 		}
@@ -283,7 +281,6 @@ public static class GameResources
 
 	private static void FreeSounds()
 	{
-		SoundEffect obj = default( SoundEffect );
 		foreach ( SoundEffect obj in _Sounds.Values ) {
 			Audio.FreeSoundEffect( obj );
 		}
@@ -291,7 +288,6 @@ public static class GameResources
 
 	private static void FreeMusic()
 	{
-		Music obj = default( Music );
 		foreach ( Music obj in _Music.Values ) {
 			Audio.FreeMusic( obj );
 		}
