@@ -17,6 +17,7 @@ static class HighScoreController
 	private const int NAME_WIDTH = 3;
 
 	private const int SCORES_LEFT = 490;
+
 	/// <summary>
 	/// The score structure is used to keep the name and
 	/// score of the top players together.
@@ -43,8 +44,11 @@ static class HighScoreController
 		}
 	}
 
-
+	/// <summary>
+	/// The list of player scores.
+	/// </summary>
 	private static List<Score> _Scores = new List<Score>();
+
 	/// <summary>
 	/// Loads the scores from the highscores text file.
 	/// </summary>
@@ -130,10 +134,10 @@ static class HighScoreController
 		for (i = 0; i <= _Scores.Count - 1; i++) {
 			Score s = default(Score);
 
-            s = _Scores[i];
+			s = _Scores[i];
 
-            //for scores 1 - 9 use 01 - 09
-            if (i < 9) {
+			//for scores 1 - 9 use 01 - 09
+			if (i < 9) {
 				SwinGame.DrawText(" " + (i + 1) + ":   " + s.Name + "   " + s.Value, Color.White, GameResources.GameFont("Courier"), SCORES_LEFT, SCORES_TOP + i * SCORE_GAP);
 			} else {
 				SwinGame.DrawText(i + 1 + ":   " + s.Name + "   " + s.Value, Color.White, GameResources.GameFont("Courier"), SCORES_LEFT, SCORES_TOP + i * SCORE_GAP);
@@ -148,7 +152,7 @@ static class HighScoreController
 	public static void HandleHighScoreInput()
 	{
 		if (SwinGame.MouseClicked(MouseButton.LeftButton) || SwinGame.KeyTyped(KeyCode.vk_ESCAPE) || SwinGame.KeyTyped(KeyCode.vk_RETURN)) {
-            GameController.EndCurrentState();
+			GameController.EndCurrentState();
 		}
 	}
 
@@ -166,13 +170,12 @@ static class HighScoreController
 		if (_Scores.Count == 0)
 			LoadScores();
 
-        //is it a high score
-        if (value > _Scores[_Scores.Count - 1].Value)
-        {
+		//is it a high score
+		if (value > _Scores[_Scores.Count - 1].Value) {
 			Score s = new Score();
 			s.Value = value;
 
-            GameController.AddNewState(GameState.ViewingHighScores);
+			GameController.AddNewState(GameState.ViewingHighScores);
 
 			int x = 0;
 			x = SCORES_LEFT + SwinGame.TextWidth(GameResources.GameFont("Courier"), "Name: ");
@@ -183,7 +186,7 @@ static class HighScoreController
 			while (SwinGame.ReadingText()) {
 				SwinGame.ProcessEvents();
 
-                UtilityFunctions.DrawBackground();
+				UtilityFunctions.DrawBackground();
 				DrawHighScores();
 				SwinGame.DrawText("Name: ", Color.White, GameResources.GameFont("Courier"), SCORES_LEFT, ENTRY_TOP);
 				SwinGame.RefreshScreen();
@@ -198,8 +201,9 @@ static class HighScoreController
 			_Scores.RemoveAt(_Scores.Count - 1);
 			_Scores.Add(s);
 			_Scores.Sort();
-			SaveScores();
-            GameController.EndCurrentState();
-		}
+			SaveScores ();
+
+			GameController.EndCurrentState();
+		}	
 	}
 }
