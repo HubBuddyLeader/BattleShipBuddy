@@ -173,6 +173,8 @@ public class SeaGrid : ISeaGrid
 		try {
 			//tile is already hit
 			if (_GameTiles[row, col].Shot) {
+                row += 1;
+                col += 1;
 				return new AttackResult(ResultOfAttack.ShotAlready, "have already attacked [" + col + "," + row + "]!", row, col);
 			}
 
